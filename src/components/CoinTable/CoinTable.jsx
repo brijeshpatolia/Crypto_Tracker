@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { fetchCoinData } from "../services/fetchCoinData";
 import {  useState } from "react";
 import store from "../../store/store";
+import { useNavigate } from "react-router-dom";
 
 function CoinTable (){
     const { currency } = store();
@@ -12,6 +13,11 @@ function CoinTable (){
         staleTime: 1000 * 60 * 10 ,
 
     });
+    const navigate = useNavigate();
+
+    const handleCoinRedirect = (coinId) => {
+        navigate(`/details/${coinId}`);
+    }
    
 
     if(isLoading) return <div>Loading...</div>;
